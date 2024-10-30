@@ -1,0 +1,45 @@
+[package]
+edition = "2021"
+name = "atproto-blog"
+version = "0.1.0"
+
+[[bin]]
+name = "server"
+path = "src/bin/server.rs"
+required-features = ["ssr"]
+
+[[bin]]
+name = "client"
+path = "src/bin/client.rs"
+required-features = ["hydrate"]
+
+[profile.release]
+opt-level = 's'
+lto = true
+strip = true
+
+[dependencies]
+leptos = { version = "0.7.0-rc0", default-features = false }
+leptos_meta = { version = "0.7.0-rc0", default-features = false }
+leptos_router = { version = "0.7.0-rc0", default-features = false}
+axum = { version = "0.7", default-features = false, optional = true, features = [
+  "macros",
+] }
+leptos_axum = { version = "0.7.0-rc0", default-features = false, optional = true }
+worker = { version = "0.4.2", features = ["http"] }
+worker-macros = { version = "0.4.2", features = ["http"] }
+async-trait = "0.1.79"
+wasm-bindgen = "0.2"
+tower = "0.4.13"
+getrandom = { version = "0.2", features = ["js"] }
+
+[features]
+default = ["ssr"]
+hydrate = ["leptos/hydrate"]
+ssr = [
+  "dep:axum",
+  "dep:leptos_axum",
+  "leptos/ssr",
+  "leptos_meta/ssr",
+  "leptos_router/ssr",
+]
