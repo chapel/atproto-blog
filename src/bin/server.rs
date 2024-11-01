@@ -20,7 +20,7 @@ pub async fn fetch(
     let mut router = Router::new()
         .leptos_routes(&leptos_options, generate_route_list(HelloWorld), HelloWorld)
         .with_state(leptos_options);
-
+    this_function_does_not_exist();
     Ok(router.call(req).await?)
 }
 

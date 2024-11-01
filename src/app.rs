@@ -6,6 +6,9 @@ pub fn hello_world() -> impl IntoView {
     provide_meta_context();
 
     view! {
-      <h1>"Hello, World! Everyone!"</h1>
+      <h1>"Hello, World! Everyone! 🎉"</h1>
+      <p>
+      "This is a simple blog powered by ATProto!"
+      </p>
     }
 }

@@ -2,3 +2,6 @@
 target
 .wrangler
 node_modules
+# Watch process files
+.watch-pid
+watchexec.log
