@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    }
+  ],
+  "settings": {
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.splitCwd": "workspaceRoot"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": []
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": []
+  }
+}

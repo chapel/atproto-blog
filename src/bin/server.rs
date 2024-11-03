@@ -4,7 +4,7 @@ use leptos_axum::{generate_route_list, LeptosRoutes};
 use tower::Service;
 use worker::*;
 
-use atproto_blog::app::HelloWorld;
+use atproto_blog::app::*;
 
 #[event(fetch)]
 pub async fn fetch(
@@ -18,9 +18,8 @@ pub async fn fetch(
         .build();
 
     let mut router = Router::new()
-        .leptos_routes(&leptos_options, generate_route_list(HelloWorld), HelloWorld)
+        .leptos_routes(&leptos_options, generate_route_list(App), shell)
         .with_state(leptos_options);
-    this_function_does_not_exist();
     Ok(router.call(req).await?)
 }
 

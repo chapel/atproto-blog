@@ -10,22 +10,10 @@ wrangler-dev:
     npx wrangler pages dev site
 
 watch-build:
-    watchexec -e rs just build
+    watchexec -n -e rs just build
 
-# Clean up any leftover files from previous runs
-cleanup:
-    pwsh -File scripts/cleanup.ps1
+tailwind-watch:
+    deno run -A npm:tailwindcss -i styles.css -o site/pkg/styles.css --watch
 
-# Start the watch-build process in the background
-start-watch:
-    pwsh -File scripts/start-watch.ps1
-
-# Clean up the watch-build process
-stop-watch:
-    pwsh -File scripts/stop-watch.ps1
-
-# Main development command that composes the above
 dev:
-    just cleanup
-    just start-watch
-    try { just wrangler-dev } finally { just stop-watch }
+    deno run -A npm:concurrently "just watch-build" "just tailwind-watch" "just wrangler-dev"
