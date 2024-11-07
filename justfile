@@ -13,7 +13,7 @@ watch-build:
     watchexec -n -e rs just build
 
 tailwind-watch:
-    deno run -A npm:tailwindcss -i styles.css -o site/pkg/styles.css --watch
+    tailwindcss -i styles.css -o site/pkg/styles.css --watch
 
 dev:
     deno run -A npm:concurrently "just watch-build" "just tailwind-watch" "just wrangler-dev"
