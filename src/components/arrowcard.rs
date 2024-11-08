@@ -1,5 +1,8 @@
 use leptos::prelude::*;
 
+use crate::components::link::Link;
+
+#[derive(Debug, Clone)]
 pub struct Entry {
     collection: String,
     slug: String,
@@ -7,18 +10,19 @@ pub struct Entry {
 }
 
 impl Entry {
-    pub fn new<S: Into<String>>(collection: S, slug: S, title: S, description: S) -> Entry {
+    pub fn new(collection: &str, slug: &str, title: &str, description: &str) -> Entry {
         Entry {
-            collection: collection.into(),
-            slug: slug.into(),
+            collection: collection.to_string(),
+            slug: slug.to_string(),
             data: Post {
-                title: title.into(),
-                description: description.into(),
+                title: title.to_string(),
+                description: description.to_string(),
             },
         }
     }
 }
 
+#[derive(Debug, Clone)]
 pub struct Post {
     title: String,
     description: String,
@@ -29,9 +33,10 @@ pub fn ArrowCard(entry: Entry) -> impl IntoView {
     let href = format!("/{}/{}", entry.collection, entry.slug);
 
     view! {
-      <a
+      <Link
         href={href}
-        class="flex relative flex-nowrap py-3 px-4 pr-10 rounded-lg border transition-colors duration-300 ease-in-out hover:text-black group border-black/15 dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white hover:bg-black/5"
+        class={"flex relative flex-nowrap py-3 px-4 pr-10 rounded-lg border transition-colors duration-300 ease-in-out hover:text-black group border-black/15 dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white hover:bg-black/5"
+          .into()}
       >
         <div class="flex flex-col flex-1 truncate">
           <div class="font-semibold">{entry.data.title}</div>
@@ -54,6 +59,6 @@ pub fn ArrowCard(entry: Entry) -> impl IntoView {
             class="transition-transform duration-300 ease-in-out -translate-x-1 group-hover:translate-x-0"
           />
         </svg>
-      </a>
+      </Link>
     }
 }

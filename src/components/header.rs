@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-use crate::components::container::Container;
+use crate::components::{container::Container, link::Link};
 
 #[component]
 pub fn Header() -> impl IntoView {
@@ -8,15 +8,15 @@ pub fn Header() -> impl IntoView {
       <header>
         <Container>
           <div class="flex flex-wrap gap-y-2 justify-between">
-            <a href="/">
+            <Link href={"/".into()}>
               <div class="font-semibold">"LEPAHC"</div>
-            </a>
+            </Link>
             <nav class="flex gap-1">
-              <a href="/blog">"blog"</a>
+              <Link href={"/blog".into()}>"blog"</Link>
               <span>"/"</span>
-              <a href="/work">"work"</a>
+              <Link href={"/work".into()}>"work"</Link>
               <span>"/"</span>
-              <a href="/projects">"projects"</a>
+              <Link href={"/projects".into()}>"projects"</Link>
             </nav>
           </div>
         </Container>

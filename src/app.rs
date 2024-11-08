@@ -5,6 +5,9 @@ use leptos_router::{
     path, SsrMode,
 };
 
+#[cfg(feature = "ssr")]
+use crate::libs::atproto::get_posts;
+
 use crate::components::{header::Header, meta::FullTitle};
 use crate::pages::home::Home;
 
@@ -47,5 +50,24 @@ pub fn App() -> impl IntoView {
 
 #[component]
 pub fn Post() -> impl IntoView {
-    view! { <h1>{"Post"}</h1> }
+    web_sys::console::log_1(&"Post start".into());
+    let records = Resource::new(
+        move || (),
+        move |_: ()| async { get_posts().await.unwrap() },
+    );
+
+    let titles = records
+        .as_borrowed()
+        .read()
+        .as_ref()
+        .unwrap()
+        .records
+        .iter()
+        .map(|r| r.value.title.clone())
+        .collect::<Vec<String>>()
+        .join(", ");
+
+    web_sys::console::log_1(&"Post end".into());
+
+    view! { <div>{titles}</div> }
 }
